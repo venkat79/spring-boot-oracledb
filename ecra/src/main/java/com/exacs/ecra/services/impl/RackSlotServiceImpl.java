@@ -10,6 +10,7 @@ import com.exacs.ecra.services.inf.RackSlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -53,6 +54,16 @@ public class RackSlotServiceImpl implements RackSlotService {
     @Override
     public RackSlot getCluster(long rackId, long clusterId) {
        return (rackSlotRepository.findClusterForRack(rackId, clusterId));
+    }
+
+    @Transactional
+    public void deleteClusters(long rackId) {
+        List<RackSlot> rackSlotList = getClusters(rackId);
+        if (!CollectionUtils.isEmpty(rackSlotList)) {
+            for (RackSlot rackSlot : rackSlotList) {
+                deleteCluster(rackSlot.getId());
+            }
+        }
     }
 
     @Transactional

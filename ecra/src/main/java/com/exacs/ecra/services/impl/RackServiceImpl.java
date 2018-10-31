@@ -5,6 +5,7 @@ import com.exacs.ecra.entities.model.Rack;
 import com.exacs.ecra.entities.request.RackRequest;
 import com.exacs.ecra.repositories.RackRepository;
 import com.exacs.ecra.services.inf.RackService;
+import com.exacs.ecra.services.inf.RackSlotService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class RackServiceImpl implements RackService {
 
     @Autowired
     private RackRepository rackRepository;
+
+    @Autowired
+    private RackSlotService rackSlotService;
+
 
     @Autowired
     private EcraConverter ecraConverter;
@@ -63,6 +68,7 @@ public class RackServiceImpl implements RackService {
     public void deleteRack(long rackIdentifier) {
         Rack rack = rackRepository.findById(rackIdentifier);
         if (rack != null) {
+            rackSlotService.deleteClusters(rackIdentifier);
             // As of now, it deletes rack but it needs to do orderly deletion of cluster etc.,
             rackRepository.delete(rack);
         }

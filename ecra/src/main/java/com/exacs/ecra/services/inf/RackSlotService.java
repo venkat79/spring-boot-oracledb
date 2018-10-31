@@ -17,6 +17,8 @@ public interface RackSlotService {
 
     void deleteCluster(long clusterId);
 
+    void deleteClusters(long rackId);
+
     void deleteClusters();
 
 }
