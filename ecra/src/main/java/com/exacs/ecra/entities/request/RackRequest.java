@@ -37,4 +37,12 @@ public class RackRequest {
     }
 
 
+    @Override
+    public String toString() {
+        return "RackRequest{" +
+                "name='" + name + '\'' +
+                ", rackType=" + rackType +
+                ", nodes=" + nodes +
+                '}';
+    }
 }

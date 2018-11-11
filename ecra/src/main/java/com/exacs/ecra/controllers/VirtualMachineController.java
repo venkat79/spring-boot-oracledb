@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,8 @@ public class VirtualMachineController {
     @PostMapping(value = APIURIConstants.V2_ECRA_RACK_ID_CLUSTER_ID_NODES_NODE_ID_VMS, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RackSlotResponse> createVM(@PathVariable long clusterId,
                                                    @PathVariable long nodeId,
-                                                   @RequestBody VirtualMachineRequest virtualMachineRequest) {
+                                                   @RequestBody VirtualMachineRequest virtualMachineRequest,
+                                                     HttpServletRequest httpServletRequest) {
 
         _logger.debug("VirtualMachineController::createVirtualMachine() called");
 

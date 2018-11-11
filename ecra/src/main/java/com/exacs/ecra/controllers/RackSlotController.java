@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -28,7 +29,9 @@ public class RackSlotController {
     private EcraConverter ecraConverter;
 
     @PostMapping(value = APIURIConstants.V2_ECRA_RACK_ID_CLUSTERS, produces= MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RackSlotResponse> createCluster(@PathVariable long rackId, @RequestBody RackSlotRequest rackSlotRequest) {
+    public ResponseEntity<RackSlotResponse> createCluster(@PathVariable long rackId,
+                                                          @RequestBody RackSlotRequest rackSlotRequest,
+                                                          HttpServletRequest httpServletRequest) {
 
         _logger.debug("RackSlotController::createCluster() called");
 

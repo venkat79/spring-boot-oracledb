@@ -21,4 +21,12 @@ public class ComputeNodeResponse {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "ComputeNodeResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

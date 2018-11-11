@@ -1,11 +1,14 @@
 package com.exacs.ecra.services.impl;
 
+import com.exacs.ecra.annotations.ExcludeAspectDebug;
 import com.exacs.ecra.converters.EcraConverter;
 import com.exacs.ecra.entities.model.Rack;
 import com.exacs.ecra.entities.request.RackRequest;
+import com.exacs.ecra.exceptions.ECRAValidationException;
 import com.exacs.ecra.repositories.RackRepository;
 import com.exacs.ecra.services.inf.RackService;
 import com.exacs.ecra.services.inf.RackSlotService;
+import com.exacs.ecra.validations.RackValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +32,14 @@ public class RackServiceImpl implements RackService {
     @Autowired
     private EcraConverter ecraConverter;
 
+    @Autowired
+    private RackValidator rackValidator;
+
     @Override
     public List<Rack> getRacks() {
        return (rackRepository.findAll());
     }
+
 
     @Override
     public Rack getRack(long rackIdentifier) {
@@ -43,8 +50,10 @@ public class RackServiceImpl implements RackService {
 
     @Override
     @Transactional
-    public Rack createRack(RackRequest rackRequest) {
+    public Rack createRack(RackRequest rackRequest) throws ECRAValidationException {
         if (rackRequest != null) {
+            rackValidator.validateForCreateRacks(rackRequest);
+
             Rack rack = ecraConverter.fromRackRequest(rackRequest);
             if (rack != null) {
                 _logger.debug("Rack object <before save> : {}", rack.toString());

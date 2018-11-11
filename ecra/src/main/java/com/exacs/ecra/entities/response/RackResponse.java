@@ -46,4 +46,14 @@ public class RackResponse {
     public void setNodes(Set<ComputeNodeResponse> nodes) {
         this.nodes = nodes;
     }
+
+    @Override
+    public String toString() {
+        return "RackResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", rackType=" + rackType +
+                ", nodes=" + nodes +
+                '}';
+    }
 }
