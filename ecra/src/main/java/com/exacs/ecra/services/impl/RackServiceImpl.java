@@ -37,7 +37,9 @@ public class RackServiceImpl implements RackService {
 
     @Override
     public List<Rack> getRacks() {
-       return (rackRepository.findAll());
+        List<Integer> rackIds = rackRepository.findRackIds();
+        _logger.debug("List of rackIds :{}", rackIds.toString());
+        return (rackRepository.findAll());
     }
 
 

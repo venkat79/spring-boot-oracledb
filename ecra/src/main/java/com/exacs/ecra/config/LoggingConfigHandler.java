@@ -43,7 +43,7 @@ public class LoggingConfigHandler {
     @Pointcut("execution ( * com.exacs.ecra..* (..))")
     public void allMethods() {}
 
-    @Pointcut("@annotation(com.exacs.ecra.annotations.ExcludeAspectDebug) || within(@com.exacs.ecra.annotations.ExcludeAspectDebug *)")
+    @Pointcut("@annotation(com.exacs.ecra.annotations.ExcludeAspectDebug)")
     public void debugExclude() {}
 
 

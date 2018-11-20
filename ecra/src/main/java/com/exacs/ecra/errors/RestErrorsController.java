@@ -27,4 +27,12 @@ public class RestErrorsController {
 		return e.getErrors();
 	}
 
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(Throwable.class)
+	@ResponseBody
+	public String handleUnExpectedRequest(final Throwable t) {
+		logger.error("Validation error", t);
+		return t.getMessage();
+	}
+
 }

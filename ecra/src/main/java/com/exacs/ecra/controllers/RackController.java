@@ -71,8 +71,9 @@ public class RackController {
      * @return
      */
     @PostMapping(value = APIURIConstants.V2_ECRA_RACK, produces= MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RackResponse> createRack(@RequestBody RackRequest rackRequest) throws ECRAValidationException {
+    public ResponseEntity<RackResponse> createRack(@RequestBody RackRequest rackRequest) throws ECRAValidationException, Exception {
         _logger.debug("RackController::createRack() called");
+
 
         Rack rack = rackService.createRack(rackRequest);
         RackResponse rackResponse = ecraConverter.toRackResponse(rack);
